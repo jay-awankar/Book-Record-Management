@@ -1,5 +1,8 @@
 const express = require("express");
 
+const usersRouter = require("./routes/users.js");
+const booksRouter = require("./routes/books.js");
+
 const app = express();
 
 const PORT = 8081;
@@ -13,7 +16,11 @@ app.get("/",(req,res) => {
     });
 });
 
-app.get("*",(req,res) => {
+app.use("/users", usersRouter);
+app.use("/books", booksRouter);
+
+
+app.get("*",(req,res) => { 
     res.status(404).json({
         message: "This route does not exists",
     });
